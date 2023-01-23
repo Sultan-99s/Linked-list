@@ -1,0 +1,71 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+}*first;
+
+void create(int n)
+{
+    struct node *last, *tem;
+    first = (struct node *)malloc(sizeof(struct node));
+    printf("Input the value 1 : ");
+    scanf("%d",&first->data);
+    first->next = NULL;
+    last = first;
+
+    for(int i=1; i<n; i++)
+    {
+        tem = (struct node *)malloc(sizeof(struct node));
+        printf("Input the value %d : ", i+1);
+        scanf("%d", &tem->data);
+        tem->next = NULL;
+        last->next = tem;
+        last=tem;
+    }
+}
+
+void insert(struct node *p, int n, int d)
+{
+    struct node *tem;
+    tem = (struct node *)malloc(sizeof(struct node));
+    tem->data=d;
+    for(int i=1; i<n-1; i++)
+    {
+        p=p->next;
+        tem->next=p->next;
+        p->next=tem;
+    }
+}
+
+void display(struct node *p)
+{
+    printf("\nThe linked list :\n");
+    while(p!=NULL)
+    {
+        printf("%d ", p-> data);
+        p=p->next;
+    }
+}
+
+int main()
+{
+    int n, pos, d;
+    printf("Size of linked list : ");
+    scanf("%d", &n);
+    create(n);
+    printf("Input a data to add at middle : ");
+    scanf("%d", &d);
+    if(n%2==0)
+    {
+        pos=(n/2)+1;
+        insert(first, pos, d);
+        printf("Data added.");
+    }
+    else
+        printf("No middle position");
+
+    display(first);
+    return 0;
+}
