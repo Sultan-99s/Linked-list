@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+}*first;
+
+void create(int n)
+{
+    struct node *last, *tem;
+    first = (struct node *)malloc(sizeof(struct node));
+    printf("Input the value 1 : ");
+    scanf("%d",&first->data);
+    first->next = NULL;
+    last = first;
+
+    for(int i=1; i<n; i++)
+    {
+        tem = (struct node *)malloc(sizeof(struct node));
+        printf("Input the value %d : ", i+1);
+        scanf("%d", &tem->data);
+        tem->next = NULL;
+        last->next = tem;
+        last=tem;
+    }
+}
+
+void display(struct node *p)
+{
+    printf("\nThe linked list : ");
+    while(p!=NULL)
+    {
+        printf("%d ", p-> data);
+        p=p->next;
+    }
+}
+
+int main()
+{
+    int n;
+    printf("Size of linked list : ");
+    scanf("%d", &n);
+    create(n);
+    display(first);
+    return 0;
+}
